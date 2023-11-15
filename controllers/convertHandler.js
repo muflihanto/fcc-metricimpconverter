@@ -37,7 +37,7 @@ function ConvertHandler() {
     const regex = /^[0-9\.\/]+$/;
     if (!regex.test(result)) return null;
 
-    const floatRegex = /^-?[\d]*(\.[\d]+)?$/g;
+    const floatRegex = /^-?[\d]*(\.[\d]+)?$/;
     // check if remaining string contains "/"
     if (result.indexOf("/") !== -1) {
       let splitres = result.split("/");
