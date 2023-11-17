@@ -12,10 +12,13 @@ module.exports = function (app) {
       res.status(404).type("text").send("invalid unit");
     } else {
       let str = String(req.query.input);
-      let initUnit = convertHandler.getUnit(str);
-      if (initUnit === null) return res.send("invalid unit");
-      let initNum = convertHandler.getNum(str);
-      if (initNum === null) return res.send("invalid number");
+      let initUnit, initNum;
+      try {
+        initUnit = convertHandler.getUnit(str);
+        initNum = convertHandler.getNum(str);
+      } catch (err) {
+        return res.send(err.message);
+      }
       let returnNum = convertHandler.convert(initNum, initUnit);
       let returnUnit = convertHandler.getReturnUnit(initUnit);
       let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);

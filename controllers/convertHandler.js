@@ -29,27 +29,27 @@ function ConvertHandler() {
   this.getNum = function (input) {
     // trim unit from the input
     let unit = this.getUnit(input);
+    if (unit.length === input.length) return 1;
     // return 1 when no numerical input is provided
-    if (unit !== undefined && unit !== null && unit.length === input.length) return 1;
     let index = String(input.toLowerCase()).indexOf(unit);
     // test if remaining string contains any invalid characters
     let result = input.slice(0, index);
     const regex = /^[0-9\.\/]+$/;
-    if (!regex.test(result)) return null;
+    if (!regex.test(result)) throw new Error("invalid number");
 
     const floatRegex = /^-?[\d]*(\.[\d]+)?$/;
     // check if remaining string contains "/"
     if (result.indexOf("/") !== -1) {
       let splitres = result.split("/");
-      // return null if string has more than one "/"
-      if (splitres.length !== 2) return null;
+      // throw Error if string has more than one "/"
+      if (splitres.length !== 2) throw new Error("invalid number");
       // check if the input is a valid number
-      if (!floatRegex.test(splitres[0]) || !floatRegex.test(splitres[1])) return null;
+      if (!floatRegex.test(splitres[0]) || !floatRegex.test(splitres[1])) throw new Error("invalid number");
       // parse divident and divisor into float, and calculate the result
       result = parseFloat(splitres[0]) / parseFloat(splitres[1]);
     } else {
       // check if the input is a valid number
-      if (!floatRegex.test(result)) return null;
+      if (!floatRegex.test(result)) throw new Error("invalid number");
       result = parseFloat(result);
     }
 
@@ -60,8 +60,8 @@ function ConvertHandler() {
     // match input using regular expression
     let unitRegex = new RegExp(`(?<=^|[0-9])(${Object.keys(units).join("|")})$`);
     let result = input.toLowerCase().match(unitRegex);
-    // return null if no match
-    if (!Array.isArray(result)) return null;
+    // throw Error if no match
+    if (!Array.isArray(result)) throw new Error("invalid unit");
     // special return for "L"
     if (result[0] === "l") return "L";
     // return first element of matching result
