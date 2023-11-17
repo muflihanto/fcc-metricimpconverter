@@ -31,7 +31,7 @@ function ConvertHandler() {
     let unit = this.getUnit(input);
     // return 1 when no numerical input is provided
     if (unit !== undefined && unit !== null && unit.length === input.length) return 1;
-    let index = String(input).indexOf(unit);
+    let index = String(input.toLowerCase()).indexOf(unit);
     // test if remaining string contains any invalid characters
     let result = input.slice(0, index);
     const regex = /^[0-9\.\/]+$/;
@@ -58,7 +58,8 @@ function ConvertHandler() {
 
   this.getUnit = function (input) {
     // match input using regular expression
-    let result = input.toLowerCase().match(new RegExp(Object.keys(units).join("$|") + "$"));
+    let unitRegex = new RegExp(`(?<=^|[0-9])(${Object.keys(units).join("|")})$`);
+    let result = input.toLowerCase().match(unitRegex);
     // return null if no match
     if (!Array.isArray(result)) return null;
     // special return for "L"
