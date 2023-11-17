@@ -42,6 +42,11 @@ suite("Unit Tests", function () {
     assert.typeOf(convertHandler.getNum("3.2/1.6lbs"), "number");
   });
   // TODO: convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).
+  test("convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).", function () {
+    assert.throws(() => convertHandler.getNum("3/2/3L"), Error);
+    assert.throws(() => convertHandler.getNum("4.2/2/3.1mi"), Error);
+    assert.throws(() => convertHandler.getNum("5.7/1.2/9.3kg"), Error);
+  });
   // TODO: convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.
   // TODO: convertHandler should correctly read each valid input unit.
   // TODO: convertHandler should correctly return an error for an invalid input unit.
