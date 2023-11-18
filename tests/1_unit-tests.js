@@ -60,6 +60,20 @@ suite("Unit Tests", function () {
     assert.equal(convertHandler.getNum("mi"), 1);
   });
   // TODO: convertHandler should correctly read each valid input unit.
+  test("convertHandler should correctly read each valid input unit.", function () {
+    assert.strictEqual(convertHandler.getUnit("5.2gal"), "gal");
+    assert.doesNotThrow(() => convertHandler.getUnit("5.2gal"), Error);
+    assert.strictEqual(convertHandler.getUnit("12l"), "L");
+    assert.doesNotThrow(() => convertHandler.getUnit("12l"), Error);
+    assert.strictEqual(convertHandler.getUnit("3/2mi"), "mi");
+    assert.doesNotThrow(() => convertHandler.getUnit("3/2mi"), Error);
+    assert.strictEqual(convertHandler.getUnit("4.5/2km"), "km");
+    assert.doesNotThrow(() => convertHandler.getUnit("4.5/2km"), Error);
+    assert.strictEqual(convertHandler.getUnit("4.5/2.0lbs"), "lbs");
+    assert.doesNotThrow(() => convertHandler.getUnit("4.5/2.0lbs"), Error);
+    assert.strictEqual(convertHandler.getUnit("42.12lbs"), "lbs");
+    assert.doesNotThrow(() => convertHandler.getUnit("42.12lbs"), Error);
+  });
   // TODO: convertHandler should correctly return an error for an invalid input unit.
   // TODO: convertHandler should return the correct return unit for each valid input unit.
   // TODO: convertHandler should correctly return the spelled-out string unit for each valid input unit.
