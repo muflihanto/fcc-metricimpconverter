@@ -48,6 +48,17 @@ suite("Unit Tests", function () {
     assert.throws(() => convertHandler.getNum("5.7/1.2/9.3kg"), Error);
   });
   // TODO: convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.
+  test("convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.", function () {
+    assert.isNotNull(convertHandler.getNum("L"), "1 is not null");
+    assert.typeOf(convertHandler.getNum("L"), "number");
+    assert.equal(convertHandler.getNum("L"), 1);
+    assert.isNotNull(convertHandler.getNum("kg"), "1 is not null");
+    assert.typeOf(convertHandler.getNum("kg"), "number");
+    assert.equal(convertHandler.getNum("kg"), 1);
+    assert.isNotNull(convertHandler.getNum("mi"), "1 is not null");
+    assert.typeOf(convertHandler.getNum("mi"), "number");
+    assert.equal(convertHandler.getNum("mi"), 1);
+  });
   // TODO: convertHandler should correctly read each valid input unit.
   // TODO: convertHandler should correctly return an error for an invalid input unit.
   // TODO: convertHandler should return the correct return unit for each valid input unit.
