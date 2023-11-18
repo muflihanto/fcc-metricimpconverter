@@ -75,6 +75,11 @@ suite("Unit Tests", function () {
     assert.doesNotThrow(() => convertHandler.getUnit("42.12lbs"), Error);
   });
   // TODO: convertHandler should correctly return an error for an invalid input unit.
+  test("convertHandler should correctly return an error for an invalid input unit.", function () {
+    assert.throws(() => convertHandler.getUnit("3/2/3Li"), Error);
+    assert.throws(() => convertHandler.getUnit("4.2/2/3.1mil"), Error);
+    assert.throws(() => convertHandler.getUnit("5.7/1.2/9.3kgr"), Error);
+  });
   // TODO: convertHandler should return the correct return unit for each valid input unit.
   // TODO: convertHandler should correctly return the spelled-out string unit for each valid input unit.
   // TODO: convertHandler should correctly convert gal to L.
