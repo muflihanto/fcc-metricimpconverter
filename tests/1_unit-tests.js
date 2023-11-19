@@ -90,6 +90,14 @@ suite("Unit Tests", function () {
     assert.strictEqual(convertHandler.getReturnUnit("mi"), "km");
   });
   // TODO: convertHandler should correctly return the spelled-out string unit for each valid input unit.
+  test("convertHandler should correctly return the spelled-out string unit for each valid input unit.", function () {
+    assert.strictEqual(convertHandler.spellOutUnit("L"), "liter");
+    assert.strictEqual(convertHandler.spellOutUnit("GAL"), "gallon");
+    assert.strictEqual(convertHandler.spellOutUnit("kg"), "kilogram");
+    assert.strictEqual(convertHandler.spellOutUnit("lbs"), "pound");
+    assert.strictEqual(convertHandler.spellOutUnit("KM"), "kilometer");
+    assert.strictEqual(convertHandler.spellOutUnit("mi"), "mile");
+  });
   // TODO: convertHandler should correctly convert gal to L.
   // TODO: convertHandler should correctly convert L to gal.
   // TODO: convertHandler should correctly convert mi to km.
