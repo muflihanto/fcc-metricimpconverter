@@ -81,6 +81,14 @@ suite("Unit Tests", function () {
     assert.throws(() => convertHandler.getUnit("5.7/1.2/9.3kgr"), Error);
   });
   // TODO: convertHandler should return the correct return unit for each valid input unit.
+  test("convertHandler should return the correct return unit for each valid input unit.", function () {
+    assert.strictEqual(convertHandler.getReturnUnit("L"), "gal");
+    assert.strictEqual(convertHandler.getReturnUnit("gal"), "L");
+    assert.strictEqual(convertHandler.getReturnUnit("kg"), "lbs");
+    assert.strictEqual(convertHandler.getReturnUnit("lbs"), "kg");
+    assert.strictEqual(convertHandler.getReturnUnit("km"), "mi");
+    assert.strictEqual(convertHandler.getReturnUnit("mi"), "km");
+  });
   // TODO: convertHandler should correctly return the spelled-out string unit for each valid input unit.
   // TODO: convertHandler should correctly convert gal to L.
   // TODO: convertHandler should correctly convert L to gal.
