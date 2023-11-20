@@ -7,7 +7,7 @@ module.exports = function (app) {
   let convertHandler = new ConvertHandler();
 
   app.route("/api/convert").get((req, res) => {
-    console.log({ input: req.query.input });
+    // console.log({ input: req.query.input });
     if (req.query.input === undefined || req.query.input === "") {
       res.status(404).type("text").send("invalid unit");
     } else {

@@ -27,6 +27,17 @@ suite("Functional Tests", function () {
       });
   });
   // TODO: Convert an invalid input such as 32g: GET request to /api/convert.
+  test("Convert an invalid input such as 32g: GET request to /api/convert.", function (done) {
+    chai
+      .request(server)
+      .keepOpen()
+      .get("/api/convert?input=32g")
+      .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.strictEqual(res.text, "invalid unit");
+        done();
+      });
+  });
   // TODO: Convert an invalid number such as 3/7.2/4kg: GET request to /api/convert.
   // TODO: Convert an invalid number AND unit such as 3/7.2/4kilomegagram: GET request to /api/convert.
   // TODO: Convert with no number such as kg: GET request to /api/convert.
