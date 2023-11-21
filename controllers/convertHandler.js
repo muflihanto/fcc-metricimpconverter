@@ -28,12 +28,12 @@ function ConvertHandler() {
 
   this.getNum = function (input) {
     // trim unit from the input
-    let unit = this.getUnit(input);
-    if (unit.length === input.length) return 1;
+    let unit = input.match(/[a-zA-Z]+$/)[0];
     // return 1 when no numerical input is provided
-    let index = String(input.toLowerCase()).indexOf(unit);
+    if (unit.length === input.length) return 1;
     // test if remaining string contains any invalid characters
-    let result = input.slice(0, index);
+    let unitStartIndex = String(input.toLowerCase()).lastIndexOf(unit);
+    let result = input.slice(0, unitStartIndex);
     const regex = /^[0-9\.\/]+$/;
     if (!regex.test(result)) throw new Error("invalid number");
 

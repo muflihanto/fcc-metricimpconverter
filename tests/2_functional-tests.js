@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 suite("Functional Tests", function () {
   this.timeout(5000);
-  // TODO: Convert a valid input such as 10L: GET request to /api/convert.
+  // Convert a valid input such as 10L: GET request to /api/convert.
   test("Convert a valid input such as 10L: GET request to /api/convert.", function (done) {
     chai
       .request(server)
@@ -26,7 +26,7 @@ suite("Functional Tests", function () {
         done();
       });
   });
-  // TODO: Convert an invalid input such as 32g: GET request to /api/convert.
+  // Convert an invalid input such as 32g: GET request to /api/convert.
   test("Convert an invalid input such as 32g: GET request to /api/convert.", function (done) {
     chai
       .request(server)
@@ -38,7 +38,7 @@ suite("Functional Tests", function () {
         done();
       });
   });
-  // TODO: Convert an invalid number such as 3/7.2/4kg: GET request to /api/convert.
+  // Convert an invalid number such as 3/7.2/4kg: GET request to /api/convert.
   test("Convert an invalid number such as 3/7.2/4kg: GET request to /api/convert.", function (done) {
     chai
       .request(server)
@@ -50,6 +50,35 @@ suite("Functional Tests", function () {
         done();
       });
   });
-  // TODO: Convert an invalid number AND unit such as 3/7.2/4kilomegagram: GET request to /api/convert.
+  // Convert an invalid number AND unit such as 3/7.2/4kilomegagram: GET request to /api/convert.
+  test("Convert an invalid number AND unit such as 3/7.2/4kilomegagram: GET request to /api/convert.", function (done) {
+    chai
+      .request(server)
+      .keepOpen()
+      .get("/api/convert?input=3/7.2/4kilomegagram")
+      .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.strictEqual(res.text, "invalid number and unit");
+        done();
+      });
+  });
   // TODO: Convert with no number such as kg: GET request to /api/convert.
+  test("Convert an invalid number AND unit such as 3/7.2/4kilomegagram: GET request to /api/convert.", function (done) {
+    chai
+      .request(server)
+      .keepOpen()
+      .get("/api/convert?input=kg")
+      .end(function (err, res) {
+        assert.equal(res.status, 200);
+        const result = JSON.parse(res.text);
+        assert.deepEqual(result, {
+          initNum: 1,
+          initUnit: "kg",
+          returnNum: 2.20462,
+          returnUnit: "lbs",
+          string: "1 kilograms converts to 2.20462 pounds",
+        });
+        done();
+      });
+  });
 });

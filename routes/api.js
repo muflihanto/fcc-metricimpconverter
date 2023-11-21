@@ -13,12 +13,21 @@ module.exports = function (app) {
     } else {
       let str = String(req.query.input);
       let initUnit, initNum;
+      let errors = [];
       try {
         initUnit = convertHandler.getUnit(str);
-        initNum = convertHandler.getNum(str);
       } catch (err) {
-        return res.send(err.message);
+        errors.push(err.message);
       }
+
+      try {
+        initNum = convertHandler.getNum(str);
+        if (errors.length > 0) return res.send(errors[0]);
+      } catch (err) {
+        if (errors.length === 0) return res.send(err.message);
+        return res.send(`${err.message} and unit`);
+      }
+
       let returnNum = convertHandler.convert(initNum, initUnit);
       let returnUnit = convertHandler.getReturnUnit(initUnit);
       let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
