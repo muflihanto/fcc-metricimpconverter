@@ -1,27 +1,27 @@
 function ConvertHandler() {
   let units = {
     kg: {
+      name: "kilograms",
       returnUnit: "lbs",
-      name: "kilogram",
     },
     lbs: {
+      name: "pounds",
       returnUnit: "kg",
-      name: "pound",
     },
     mi: {
+      name: "miles",
       returnUnit: "km",
-      name: "mile",
     },
     km: {
+      name: "kilometers",
       returnUnit: "mi",
-      name: "kilometer",
     },
     gal: {
-      name: "gallon",
+      name: "gallons",
       returnUnit: "L",
     },
     l: {
-      name: "liter",
+      name: "liters",
       returnUnit: "gal",
     },
   };
@@ -96,11 +96,11 @@ function ConvertHandler() {
           return initNum * miToKm;
       }
     })();
-    return parseFloat(result.toPrecision(5));
+    return parseFloat(result.toFixed(5));
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-    return `${initNum} ${this.spellOutUnit(initUnit)}s converts to ${returnNum} ${this.spellOutUnit(returnUnit)}s`;
+    return `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
   };
 }
 

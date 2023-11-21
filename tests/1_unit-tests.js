@@ -5,7 +5,7 @@ const ConvertHandler = require("../controllers/convertHandler.js");
 let convertHandler = new ConvertHandler();
 
 suite("Unit Tests", function () {
-  // TODO: convertHandler should correctly read a whole number input.
+  // convertHandler should correctly read a whole number input.
   test("convertHandler should correctly read a whole number input.", function () {
     assert.isNotNull(convertHandler.getNum("1L"), "1 is not null");
     assert.typeOf(convertHandler.getNum("1L"), "number");
@@ -14,7 +14,7 @@ suite("Unit Tests", function () {
     assert.isNotNull(convertHandler.getNum("75671lbs"), "75671 is not null");
     assert.typeOf(convertHandler.getNum("75671lbs"), "number");
   });
-  // TODO: convertHandler should correctly read a decimal number input.
+  // convertHandler should correctly read a decimal number input.
   test("convertHandler should correctly read a decimal number input.", function () {
     assert.isNotNull(convertHandler.getNum("1.01L"), "1.01 is not null");
     assert.typeOf(convertHandler.getNum("1.0L"), "number");
@@ -23,7 +23,7 @@ suite("Unit Tests", function () {
     assert.isNotNull(convertHandler.getNum("756.71lbs"), "756.71 is not null");
     assert.typeOf(convertHandler.getNum("756.71lbs"), "number");
   });
-  // TODO: convertHandler should correctly read a fractional input.
+  // convertHandler should correctly read a fractional input.
   test("convertHandler should correctly read a fractional input.", function () {
     assert.isNotNull(convertHandler.getNum("1/2L"), "1/2 is not null");
     assert.typeOf(convertHandler.getNum("1/2L"), "number");
@@ -32,7 +32,7 @@ suite("Unit Tests", function () {
     assert.isNotNull(convertHandler.getNum("3/4lbs"), "3/4 is not null");
     assert.typeOf(convertHandler.getNum("3/4lbs"), "number");
   });
-  // TODO: convertHandler should correctly read a fractional input with a decimal.
+  // convertHandler should correctly read a fractional input with a decimal.
   test("convertHandler should correctly read a fractional input with a decimal.", function () {
     assert.isNotNull(convertHandler.getNum("1.0/2L"), "1.0/2 is not null");
     assert.typeOf(convertHandler.getNum("1.0/2L"), "number");
@@ -41,13 +41,13 @@ suite("Unit Tests", function () {
     assert.isNotNull(convertHandler.getNum("3.2/1.6lbs"), "3.2/1.6 is not null");
     assert.typeOf(convertHandler.getNum("3.2/1.6lbs"), "number");
   });
-  // TODO: convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).
+  // convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).
   test("convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).", function () {
     assert.throws(() => convertHandler.getNum("3/2/3L"), Error);
     assert.throws(() => convertHandler.getNum("4.2/2/3.1mi"), Error);
     assert.throws(() => convertHandler.getNum("5.7/1.2/9.3kg"), Error);
   });
-  // TODO: convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.
+  // convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.
   test("convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.", function () {
     assert.isNotNull(convertHandler.getNum("L"), "1 is not null");
     assert.typeOf(convertHandler.getNum("L"), "number");
@@ -59,7 +59,7 @@ suite("Unit Tests", function () {
     assert.typeOf(convertHandler.getNum("mi"), "number");
     assert.equal(convertHandler.getNum("mi"), 1);
   });
-  // TODO: convertHandler should correctly read each valid input unit.
+  // convertHandler should correctly read each valid input unit.
   test("convertHandler should correctly read each valid input unit.", function () {
     assert.strictEqual(convertHandler.getUnit("5.2gal"), "gal");
     assert.doesNotThrow(() => convertHandler.getUnit("5.2gal"), Error);
@@ -74,13 +74,13 @@ suite("Unit Tests", function () {
     assert.strictEqual(convertHandler.getUnit("42.12lbs"), "lbs");
     assert.doesNotThrow(() => convertHandler.getUnit("42.12lbs"), Error);
   });
-  // TODO: convertHandler should correctly return an error for an invalid input unit.
+  // convertHandler should correctly return an error for an invalid input unit.
   test("convertHandler should correctly return an error for an invalid input unit.", function () {
     assert.throws(() => convertHandler.getUnit("3/2/3Li"), Error);
     assert.throws(() => convertHandler.getUnit("4.2/2/3.1mil"), Error);
     assert.throws(() => convertHandler.getUnit("5.7/1.2/9.3kgr"), Error);
   });
-  // TODO: convertHandler should return the correct return unit for each valid input unit.
+  // convertHandler should return the correct return unit for each valid input unit.
   test("convertHandler should return the correct return unit for each valid input unit.", function () {
     assert.strictEqual(convertHandler.getReturnUnit("L"), "gal");
     assert.strictEqual(convertHandler.getReturnUnit("gal"), "L");
@@ -89,16 +89,20 @@ suite("Unit Tests", function () {
     assert.strictEqual(convertHandler.getReturnUnit("km"), "mi");
     assert.strictEqual(convertHandler.getReturnUnit("mi"), "km");
   });
-  // TODO: convertHandler should correctly return the spelled-out string unit for each valid input unit.
+  // convertHandler should correctly return the spelled-out string unit for each valid input unit.
   test("convertHandler should correctly return the spelled-out string unit for each valid input unit.", function () {
-    assert.strictEqual(convertHandler.spellOutUnit("L"), "liter");
-    assert.strictEqual(convertHandler.spellOutUnit("GAL"), "gallon");
-    assert.strictEqual(convertHandler.spellOutUnit("kg"), "kilogram");
-    assert.strictEqual(convertHandler.spellOutUnit("lbs"), "pound");
-    assert.strictEqual(convertHandler.spellOutUnit("KM"), "kilometer");
-    assert.strictEqual(convertHandler.spellOutUnit("mi"), "mile");
+    assert.strictEqual(convertHandler.spellOutUnit("L"), "liters");
+    assert.strictEqual(convertHandler.spellOutUnit("GAL"), "gallons");
+    assert.strictEqual(convertHandler.spellOutUnit("kg"), "kilograms");
+    assert.strictEqual(convertHandler.spellOutUnit("lbs"), "pounds");
+    assert.strictEqual(convertHandler.spellOutUnit("KM"), "kilometers");
+    assert.strictEqual(convertHandler.spellOutUnit("mi"), "miles");
   });
-  // TODO: convertHandler should correctly convert gal to L.
+  // convertHandler should correctly convert gal to L.
+  test("convertHandler should correctly convert gal to L.", function () {
+    assert.strictEqual(convertHandler.convert(1, "gal"), 3.78541);
+    assert.strictEqual(convertHandler.convert(3.1, "gal"), 11.73477);
+  });
   // TODO: convertHandler should correctly convert L to gal.
   // TODO: convertHandler should correctly convert mi to km.
   // TODO: convertHandler should correctly convert km to mi.

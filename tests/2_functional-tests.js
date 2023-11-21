@@ -19,9 +19,9 @@ suite("Functional Tests", function () {
         assert.deepEqual(result, {
           initNum: 10,
           initUnit: "L",
-          returnNum: 2.6417,
+          returnNum: 2.64172,
           returnUnit: "gal",
-          string: "10 liters converts to 2.6417 gallons",
+          string: "10 liters converts to 2.64172 gallons",
         });
         done();
       });
