@@ -47,6 +47,7 @@ function ConvertHandler() {
       if (!floatRegex.test(splitres[0]) || !floatRegex.test(splitres[1])) throw new Error("invalid number");
       // parse divident and divisor into float, and calculate the result
       result = parseFloat(splitres[0]) / parseFloat(splitres[1]);
+      result = parseFloat(result.toFixed(5));
     } else {
       // check if the input is a valid number
       if (!floatRegex.test(result)) throw new Error("invalid number");
