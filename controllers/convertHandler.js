@@ -32,7 +32,7 @@ function ConvertHandler() {
     // return 1 when no numerical input is provided
     if (unit.length === input.length) return 1;
     // test if remaining string contains any invalid characters
-    let unitStartIndex = String(input.toLowerCase()).lastIndexOf(unit);
+    let unitStartIndex = input.lastIndexOf(unit);
     let result = input.slice(0, unitStartIndex);
     const regex = /^[0-9\.\/]+$/;
     if (!regex.test(result)) throw new Error("invalid number");
